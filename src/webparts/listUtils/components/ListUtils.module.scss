@@ -1,0 +1,18 @@
+.listUtils {
+  width: 100%;
+}
+
+:global {
+  #sp-appBar {
+    display: none !important;
+  }
+  #spSiteHeader {
+    display: none !important;
+  }
+  #spCommandBar {
+    display: none !important;
+  }
+  #SuiteNavWrapper {
+    display: none !important;
+  }
+}

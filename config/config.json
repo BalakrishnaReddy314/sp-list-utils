@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "list-utils-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/listUtils/ListUtilsWebPart.js",
+          "manifest": "./src/webparts/listUtils/ListUtilsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ListUtilsWebPartStrings": "lib/webparts/listUtils/loc/{locale}.js"
+  }
+}

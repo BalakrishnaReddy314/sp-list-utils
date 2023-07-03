@@ -4,6 +4,63 @@ import styles from "./ListsInfo.module.scss";
 import { IListInfo } from "@pnp/sp/lists";
 import SPServices from "../../Services";
 import ListCard from "../listCard/ListCard";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
+import { IButtonStyles, IconButton } from "office-ui-fabric-react/lib/Button";
+import InfoCard from "../listCard/InfoCard";
+import { IIconProps } from "office-ui-fabric-react/lib/Icon";
+import { FontWeights, getTheme, mergeStyleSets } from "office-ui-fabric-react";
+
+const theme = getTheme();
+const contentStyles = mergeStyleSets({
+    container: {
+        display: "flex",
+        flexFlow: "column nowrap",
+        alignItems: "stretch",
+        width:  "80vw",
+    },
+    header: [
+        theme.fonts.xLargePlus,
+        {
+            flex: "1 1 auto",
+            borderTop: `4px solid ${theme.palette.themePrimary}`,
+            color: theme.palette.neutralPrimary,
+            display: "flex",
+            alignItems: "center",
+            columnGap: "20px",
+            fontWeight: FontWeights.semibold,
+            padding: "12px 12px 14px 24px",
+        },
+    ],
+    heading: {
+        color: theme.palette.neutralPrimary,
+        fontWeight: FontWeights.semibold,
+        fontSize: "inherit",
+        margin: "0",
+    },
+    body: {
+        flex: "4 4 auto",
+        padding: "0 24px 24px 24px",
+        overflowY: "hidden",
+        selectors: {
+            "p:first-child": { marginTop: 0 },
+            "p:last-child": { marginBottom: 0 },
+        },
+    },
+});
+
+const iconButtonStyles: Partial<IButtonStyles> = {
+    root: {
+      color: theme.palette.neutralPrimary,
+      marginLeft: "auto",
+      marginTop: "4px",
+      marginRight: "2px",
+    },
+    rootHovered: {
+      color: theme.palette.neutralDark,
+    },
+};
+
+const cancelIcon: IIconProps = { iconName: "Cancel" };
 
 function ListsInfo(): JSX.Element {
     const [lists, setLists] = useState<IListInfo[]>([]);
@@ -14,6 +71,7 @@ function ListsInfo(): JSX.Element {
     const services = new SPServices();
 
     const toggleListDetailsModal = (): void => {
+        // eslint-disable-next-line no-unused-expressions
         openDetailsModal && setSelectedList(null);
         setOpenDetailsModal(!openDetailsModal);
     }
@@ -30,7 +88,7 @@ function ListsInfo(): JSX.Element {
     const getAuthor = (list: IListInfo): string => {
         const tempList = list as any;
 
-        return tempList.Author.Title;
+        return tempList?.Author.Title;
     }
 
     return (

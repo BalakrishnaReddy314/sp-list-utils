@@ -17,7 +17,7 @@ export default class SPServices {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise<IListInfo[]>(async (resolve, reject) => {
             try {
-                const lists = await this._sp.web.lists.filter("(Hidden eq false) and (BaseTemplate eq 100)").select("*")();
+                const lists = await this._sp.web.lists.filter("(Hidden eq false) and (BaseTemplate eq 100)").expand("Author").select("*", "Author/Title")();
                 resolve(lists);
             } catch (error) {
                 reject(error);

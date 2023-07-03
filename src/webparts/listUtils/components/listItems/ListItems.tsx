@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import SPServices from "../../services/Services";
+import SPServices from "../../Services";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import { IFieldInfo } from "@pnp/sp/fields/types";
 
 interface IColumn {
     header: string;
@@ -19,9 +20,9 @@ function ListItems(): JSX.Element {
     const services = new SPServices();
 
     useEffect(() => {
-        services.getListFields(searchParams.get("title")).then((fields) => {
-            setColumns(fields.map(f => {return { field: f.InternalName, header: f.Title }}));
-            services.getListItems(searchParams.get("title")).then((data) => {
+        services.getListFields(searchParams.get("title")).then((fields: IFieldInfo[]) => {
+            setColumns(fields.map((f: IFieldInfo) => {return { field: f.InternalName, header: f.Title }}));
+            services.getListItems(searchParams.get("title")).then((data: any[]) => {
                 setListItems(data);
             }).catch((error: Error) => {
                 console.log(error.message);

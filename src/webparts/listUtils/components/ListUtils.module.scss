@@ -3,6 +3,9 @@
 }
 
 :global {
+  * {
+    font-family: "Agave Nerd Font", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
   #sp-appBar {
     display: none !important;
   }

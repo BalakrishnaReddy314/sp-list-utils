@@ -16,6 +16,7 @@ function ListCard({ listInfo, index, setOpenModalDetails, setSelectedList }: ILi
 
     const onShowDetailsClick = (): void => {
         setSelectedList(listInfo);
+        setOpenModalDetails(true);
     }
 
     const onViewItemsClick = (): void => {

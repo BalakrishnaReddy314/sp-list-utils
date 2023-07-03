@@ -32,18 +32,17 @@ jobs:
         gulp bundle --ship
         gulp package-solution --ship
       working-directory: ${{ env.SolutionFolder }}
+      
+    - name: Run npm i -g @pnp/cli-microsoft365
+      run: |
+        npm i -g @pnp/cli-microsoft365
+      working-directory: ${{ env.SolutionFolder }}
+      
+    - name: Login to m365 cli
+      run: |
+        m365 login --authType password --userName ${{ secrets.USER_NAME }} --password ${{ secrets.PASSWORD }}
         
-    - name: CLI for Microsoft 365 login
-      uses: pnp/action-cli-login@v2.0.0
-      with:
-        ADMIN_USERNAME:  ${{ secrets.USER_NAME }}
-        ADMIN_PASSWORD:  ${{ secrets.PASSWORD }}
+    - name: Add spfx solution to site collection
+      run: |
+        m365 spo app add --filePath ${{ env.SolutionPackagePath }} --appCatalogScope sitecollection --appCatalogUrl ${{ secrets.SPO_URL }}
     
-    # Deploy package to tenant using action-cli-deploy
-    - name: Deploy app to a site collection
-      uses: pnp/action-cli-deploy@v2.0.0
-      with:
-        APP_FILE_PATH: ${{ env.SolutionPackagePath }}
-        appCatalogScope: sitecollection
-        SITE_COLLECTION_URL: ${{ secrets.SPO_URL }}
-        OVERWRITE: true

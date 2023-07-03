@@ -44,5 +44,5 @@ jobs:
         
     - name: Add spfx solution to site collection
       run: |
-        m365 spo app add --filePath ${{ env.SolutionPackagePath }} --appCatalogScope sitecollection --appCatalogUrl ${{ secrets.SPO_URL }}
+        m365 spo app add --filePath ${{ env.SolutionPackagePath }} --appCatalogScope sitecollection --appCatalogUrl ${{ secrets.SPO_URL }} --overwrite
     

@@ -4,6 +4,7 @@ on: [push]
 
 env:
   SolutionFolder: ../sp-list-utils
+  SolutionPackagePath: ../sp-list-utils/sharepoint/solution/list-utils.sppkg
 
 jobs:
   build:
